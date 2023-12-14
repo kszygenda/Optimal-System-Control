@@ -96,5 +96,37 @@ def Zadanie3():
     plt.xlabel('Time [s]')
     plt.show()
 
+def model4(t,x):
+    A=1.5
+    w=0.65
+    m=0.5
+    R=1
+    d=0.5
+    g=10
+    J=m*R**2
+    Tm=A*np.sin(w*t)
+    x1=x[0] 
+    x2=x[1]
+    dxdt1=x2
+    dxdt2=-(1/J)*Tm-(d/J)*x2-(m*g*R/J)*np.sin(x1)
+    return np.array([dxdt1,dxdt2])
 
-Zadanie3()
+def Zadanie4():
+    t=np.linspace(0,50,1000)
+    y0=[0, 0]  # Update initial conditions to include both x1 and x2
+
+    # Solving the ODE // model,tspan, initial conditions, time points. Used method is Runge-Kutta 45
+    sol=solve_ivp(model4,[0,50],y0,t_eval=t)  # Update initial conditions argument
+    
+    # Plotting the solution
+    plt.figure(figsize=(12, 8), dpi=130)
+    plt.plot(sol.t,sol.y[0],'b-',label='x1 = y') # Updated line
+    plt.plot(sol.t,sol.y[1],'r-',label='x2 = dydt') # Updated line
+    plt.xlabel('Time [s]')
+    plt.ylabel('wartosci x1 i x2')
+    plt.legend()
+    plt.grid()
+    plt.title('Solution of ODE')
+    plt.show()
+
+Zadanie4()
