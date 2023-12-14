@@ -61,7 +61,7 @@ def feedback(t,y,xd):
     T=2
     u=kp*e
     uc=np.clip(u,-0.1,0.1)
-    uc=u
+    #uc=u
     dydt=(kob/T)*uc-(1/T)*y[0] # CO DO CHUJA
     return np.array([dydt])
 
@@ -108,7 +108,7 @@ def model4(t,x):
     x1=x[0] 
     x2=x[1]
     dxdt1=x2
-    dxdt2=-(1/J)*Tm-(d/J)*x2-(m*g*R/J)*np.sin(x1)
+    dxdt2=(1/J)*Tm-(d/J)*x2-(m*g*R/J)*np.sin(x1)
     return np.array([dxdt1,dxdt2])
 
 def Zadanie4():
@@ -129,4 +129,7 @@ def Zadanie4():
     plt.title('Solution of ODE')
     plt.show()
 
+Zadanie1()
+Zadanie2()
+Zadanie3()
 Zadanie4()
