@@ -128,18 +128,21 @@ def SDC_Model(t,y,u):
 
 def Zadanie53():
     t=np.linspace(0,10,1000)
-    y0=np.array([np.pi/4,0])
-    y_sol=solve_ivp(model51,[0,10],y0,t_eval=t,args=(0,))
-    y_sdc=solve_ivp(SDC_Model,[0,10],y0,t_eval=t,args=(0,))
-    plt.figure()
-    plt.plot(y_sol.t,y_sol.y[0],'b-',label='x1_ivp')
-    plt.plot(y_sol.t,y_sol.y[1],'r-',label='x2_ivp')
-    plt.plot(y_sdc.t,y_sdc.y[0],'g-',label='x1_sdc')
-    plt.plot(y_sdc.t,y_sdc.y[1],'y-',label='x2_sdc')
-    plt.legend(loc='best')
-    plt.xlabel('t')
-    plt.grid()
-    plt.show()
+    x1_vec=[np.pi/4,0]
+    for x1 in x1_vec:
+        y0=np.array([x1,0])
+        y_sol=solve_ivp(model51,[0,10],y0,t_eval=t,args=(0,))
+        y_sdc=solve_ivp(SDC_Model,[0,10],y0,t_eval=t,args=(0,))
+        plt.figure()
+        plt.title('x1(0)='+str(x1))
+        plt.plot(y_sol.t,y_sol.y[0],'b-',label='x1_ivp')
+        plt.plot(y_sol.t,y_sol.y[1],'r-',label='x2_ivp')
+        plt.plot(y_sdc.t,y_sdc.y[0],'g-',label='x1_sdc')
+        plt.plot(y_sdc.t,y_sdc.y[1],'y-',label='x2_sdc')
+        plt.legend(loc='best')
+        plt.xlabel('t')
+        plt.grid()
+        plt.show()
 
 if __name__ == '__main__':
     #Zadanie2()
