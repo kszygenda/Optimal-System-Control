@@ -205,7 +205,7 @@ def Zadanie3():
     # Parametry LQR
     R = np.eye(1)
     Q = np.eye(4)
-    S = 10*np.eye(4)
+    S = 10* np.eye(4)
     
     # P i K dla lqr z nieskonczonym horyzontem czasowym
     P_ricatti=scipy.linalg.solve_continuous_are(A,B,Q,R)
