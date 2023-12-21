@@ -159,12 +159,12 @@ def model3_ricatti_dyn(t,y):
     dxdt1=y[1]
     dxdt2=-(m*g*l*np.sin(y[0]))/J1 - k/J1 * (y[0]-y[2])
     dxdt3=y[3]
-    dxdt4=(k/J2) * (y[0]-y[2]) + (u/J2)
-    return np.array([dxdt1,dxdt2,dxdt3,dxdt4])
-
-def Zadanie3():
-    J1=0.04
-    J2=0.3
+    dxdt4=(k/J2) * (y[0]-y[2]) + (u/J2) 
+    return np.array([dxdt1,dxdt2,dxdt3,dxdt4]) 
+ 
+def Zadanie3(): 
+    J1=0.04 
+    J2=0.3 
     m=0.5
     l=0.5
     g=9.81
@@ -205,14 +205,14 @@ def Zadanie3():
     # Parametry LQR
     R = np.eye(1)
     Q = np.eye(4)
-    S = 10* np.eye(4)
+    S = np.eye(4)
     
     # P i K dla lqr z nieskonczonym horyzontem czasowym
     P_ricatti=scipy.linalg.solve_continuous_are(A,B,Q,R)
     K = np.linalg.inv(R) @ B.T @ P_ricatti
     # Obliczenie dynamicznego P
     global t_end
-    t_end = 1.5
+    t_end = 5
     t_ricatti = np.linspace(t_end,0,1000)
     global p_sol
     p_sol = solve_ivp(ricatti,[t_end,0],np.reshape(S,(16,)),t_eval=t_ricatti)
@@ -243,6 +243,7 @@ def Zadanie3():
 
 
 if __name__ == "__main__":
+    Zadanie2()
     Zadanie3()
 
 
