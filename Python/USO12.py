@@ -51,8 +51,10 @@ def Zadanie2():
     X0 = np.array([np.pi/4,0])
     y_ss=solve_ivp(model_ss,[0,10],X0,t_eval=t,args=(0,))
     y_ivp=solve_ivp(model1,[0,10],X0,t_eval=t,args=(0,))
-    plt.plot(t,y_ivp.y[0],'g-',label='x1_ivp')
-    plt.plot(t,y_ivp.y[1],'y-',label='x2_ivp')
+    plt.plot(t, y_ivp.y[0],'g-',label='x1')
+    plt.plot(t, y_ivp.y[1],'y-',label='x2')
+    plt.plot(t, y_ss.y[0],label='x1_lin')
+    plt.plot(t, y_ss.y[1], label='x2_lin')
     plt.xlabel('t')
     plt.legend(loc='best')
     plt.grid()
@@ -241,43 +243,8 @@ def Zadanie3():
     plt.grid()
     plt.show()
 
-def Pendulum():
-    l=1
-    J=1
-    d=0.5
-    g=9.81
-    m=9
-    t=np.linspace(0,10,1000)
-    X0 = np.array([np.pi/4,0])
-    y_ss=solve_ivp(model_ss,[0,10],X0,t_eval=t,args=(0,))
-    y_ivp=solve_ivp(model1,[0,10],X0,t_eval=t,args=(0,))
-    plt.plot(t,y_ivp.y[0],'g-',label='x1_ivp')
-    plt.plot(t,y_ivp.y[1],'y-',label='x2_ivp')
-    plt.xlabel('t')
-    plt.legend(loc='best')
-    plt.grid()
-    plt.title('Zadanie 2.1, x1(0)=[pi/4,0]')
-    plt.show()
-    #Przebiegi niby po częsci się pokrywają ale aproksymacja ucieka do nieskonczonosci
-    #Powodem tego jest aproksymowany punkt pracy, przez który druga pochodna 
-    # zmiennej stanu (przyśpieszenie) ma dodatnią część mgl/J i rośnie w nieskończoność.
-
-    # Zadanie 2.2
-    A = np.array([[0,1],[m*g*l/J,-d/J]])
-    B = np.array([[0],[1/J]])
-    R = np.eye(1)
-    Q = np.eye(2)
-    P_ricatti=scipy.linalg.solve_continuous_are(A,B,Q,R)
-    K=np.linalg.inv(R) @ B.T @ P_ricatti
-    X0_vec=[np.pi - 0.1, np.pi - 0.3,np.pi - 0.5,np.pi/2]
-    for new_x0 in X0_vec:
-        X0 = np.array([new_x0,0])
-        y_ricatti=solve_ivp(model_ricatti,[0,10],X0,t_eval=t,args=(0,K))
-        plt.plot(t,y_ricatti.y[0],'g-',label='x1_ricatti')
-        plt.plot(t,y_ricatti.y[1],'y-',label='x2_ricatti')
-        plt.xlabel('t')
-
 if __name__ == "__main__":
-    Pendulum()
+    Zadanie2()
+    Zadanie3()
 
 

@@ -85,7 +85,7 @@ def Zadanie3():
         plt.xlabel('t')
         plt.legend(loc='best')
         plt.grid()
-        plt.title('Zadanie 3, omega_c = ' + str(omega_c))
+        plt.title('Zadanie 3, ωc = ' + str(omega_c))
         plt.savefig('Zadanie3_'+str(i)+'.jpg')
         plt.show()
         #Stabilizacja na 5 volt
@@ -100,11 +100,11 @@ def model_dyn_Zpomiarowe(y,t,k1,k2):
     x1 = y[0]
     x2 = y[1]
     dxdt = np.array([[x1], [x2]])
-    e1 = y[2]
-    e2 = y[3]
+    e1 = 5-x1
+    e2 = 0-x2
     dedt = np.array([[e1], [e2]])
     # Wejścia
-    uFB = k1*e1 + k2*e2 + k1*np.sin(4*np.pi*t)**2 + k2*np.cos(4*np.pi*t)**2
+    uFB = k1*(e1+np.sin(4*np.pi*t)**2) + k2*(e2 + np.sin(4*np.pi*t)**2)
     uD = 5/Vin
     u = uFB + uD
     #Macierze Stanu
@@ -142,7 +142,7 @@ def Zadanie41():
         plt.xlabel('t')
         plt.legend(loc='best')
         plt.grid()
-        plt.title('Zadanie 4.1, omega_c = ' + str(omega_c))
+        plt.title('Zadanie 4.1, ωc = ' + str(omega_c))
         plt.savefig('Zadanie41_'+str(i)+'.jpg')
         plt.show()
         #Stabilizacja na 5 volt
@@ -157,8 +157,8 @@ def model_dyn_Zprocesu(y,t,k1,k2):
     x1 = y[0]
     x2 = y[1]
     dxdt = np.array([[x1], [x2]])
-    e1 = y[2]
-    e2 = y[3]
+    e1 = 0-x1
+    e2 = 0-x2
     dedt = np.array([[e1], [e2]])
     # Wejścia
     uFB = k1*e1 + k2*e2
@@ -199,7 +199,7 @@ def Zadanie42():
         plt.xlabel('t')
         plt.legend(loc='best')
         plt.grid()
-        plt.title('Zadanie 4.2, omega_c = ' + str(omega_c))
+        plt.title('Zadanie 4.2, ωc = ' + str(omega_c))
         plt.savefig('Zadanie42_'+str(i)+'.jpg')
         plt.show()
         #Stabilizacja na 5 volt
