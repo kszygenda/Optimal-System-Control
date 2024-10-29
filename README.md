@@ -1,3 +1,2 @@
 # Optimal-System-Control
-Optimal System Control laboratory scripts using matlab/python.
-Scripts that I use for tasks during labs.
+PUT course "Optimal System Control" scripts/solutions using matlab/Python
